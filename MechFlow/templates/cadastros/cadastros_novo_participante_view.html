@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechFlow 0.1.0</title>
+</head>
+<body>
+    <h1>Cadastro de Novo Participante</h1>
+    <a href="{% url 'cadastros:cadastros_clientes' %}">Voltar</a>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Salvar">
+    </form>
+</body>
+</html>

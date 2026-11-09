@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
+from .forms import ParticipanteForm
 
 # Create your views here.
 def cadastros_index(request):
@@ -10,3 +11,16 @@ def cadastros_voltar(request):
 
 def cadastros_clientes(request):
     return render(request, 'cadastros/cadastros_clientes_view.html')
+
+def cadastros_novo_participante(request:HttpRequest):
+
+    context = {
+        'form': ParticipanteForm()
+    }
+    
+    return render(request, 'cadastros/cadastros_novo_participante_view.html', context)
+
+
+
+
+
