@@ -12,15 +12,14 @@ def cadastros_voltar(request):
 def cadastros_clientes(request):
     return render(request, 'cadastros/cadastros_clientes_view.html')
 
-def cadastros_novo_participante(request:HttpRequest):
+def cadastros_novo_cliente(request:HttpRequest):
+    if request.method == 'POST':
+        form = ParticipanteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'cadastros/cadastros_clientes_view.html')
 
     context = {
         'form': ParticipanteForm()
     }
-    
-    return render(request, 'cadastros/cadastros_novo_participante_view.html', context)
-
-
-
-
-
+    return render(request, 'cadastros/cadastros_novo_cliente_view.html', context)

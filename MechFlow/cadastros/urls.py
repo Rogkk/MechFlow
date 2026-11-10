@@ -7,5 +7,5 @@ urlpatterns = [
     path('', views.cadastros_index, name='cadastros_index'),
     path('voltar/', views.cadastros_voltar, name='cadastros_voltar'),
     path('clientes/', views.cadastros_clientes, name='cadastros_clientes'),
-    path('cadastro_participante/', views.cadastros_novo_participante, name='cadastros_novo_participante'),
+    path('cadastro_cliente/', views.cadastros_novo_cliente, name='cadastros_novo_cliente'),
 ]

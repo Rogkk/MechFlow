@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechFlow 0.1.0</title>
+</head>
+<body>
+    <h1>Cadastro de Novo Participante</h1>
+    <button onclick="window.history.back()">Descartar</button>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Salvar">
+
+        <label id="nome">Nome:</label>
+        <label id="razao_social">Razão Social:</label>
+        {{ form.nome_razao_social }}
+
+        <div id="campo-nome-fantasia">
+            <label>Nome Fantasia:</label><br>
+            {{ form.nome_fantasia}}
+        </div><br>
+        
+        <label>CPF/CNPJ:</label><br>
+        {{ form.cpf_cnpj }}
+        
+        <br><label>Tipo de Pessoa:</label><br>   
+        {{ form.tipo_pessoa }}
+
+
+        <br><br>
+        <div id="campo-contato">
+            <h2>Contato:</h2><br>
+            
+            <label>Celular:</label><br>
+            {{ form.celular }}
+            
+            <br><label>Telefone:</label><br>
+            {{ form.fone }}
+            
+            <br><label>Email:</label><br>
+            {{ form.email }}
+        </div>
+
+        <!-- cep, endereco, numero, complemento, bairro, cidade, uf, -->
+        <br><br>
+        <div id='campo-endereco'>
+            <h2>Endereço:</h2><br>
+            
+            <label>CEP:</label><br>
+            {{ form.cep }}
+            
+            <br><label>Endereço:</label><br>
+            {{ form.endereco }}
+            
+            <br><label>Número:</label><br>
+            {{ form.numero }}
+            
+            <br><label>Complemento:</label><br>
+            {{ form.complemento }}
+            
+            <br><label>Bairro:</label><br>
+            {{ form.bairro }}
+            
+            <br><label>Cidade:</label><br>
+            {{ form.cidade }}
+            
+            <br><label>UF:</label><br>
+            {{ form.uf }}
+
+        <!-- inscricao_estadual, eh_contribuinte, inscrição_municipal -->
+         <div id='campo-impostos'>
+            <h2>Impostos:</h2><br>
+            
+            <label>Inscrição Estadual:</label><br>
+            {{ form.inscricao_estadual }}
+            
+            <br><label>É Contribuinte?</label>
+            {{ form.eh_contribuinte }}
+            
+            <br><label>Inscrição Municipal:</label><br>
+            {{ form.inscricao_municipal }}
+        </div>
+
+        <!-- eh_cliente, eh_fornecedor, eh_funcionario, ativo, empresa_id -->
+        <br><br>
+        <div id='campo-suporte'>
+            <h2>Suporte:</h2><br>
+            
+            <label>É Cliente?</label>
+            {{ form.eh_cliente }}
+            
+            <br><label>É Fornecedor?</label>
+            {{ form.eh_fornecedor }}
+            
+            <br><label>É Funcionário?</label>
+            {{ form.eh_funcionario }}
+            
+            <br><label>Ativo?</label>
+            {{ form.ativo }}
+        </div>
+
+        
+    </form>
+</body>
+<script>
+    
+    const tipoPessoa = document.getElementById('id_tipo_pessoa');
+
+    function atualizarCampos() {
+        const pessoaJuridica = tipoPessoa.value === 'J';
+        const pessoaFisica = tipoPessoa.value === 'F';
+
+        document.getElementById('campo-nome-fantasia').style.display = pessoaJuridica ? 'block' : 'none';
+        document.getElementById('nome').style.display = pessoaJuridica ? 'none' : 'block';
+        document.getElementById('razao_social').style.display = pessoaFisica ? 'none' : 'block';
+        document.getElementById('campo-impostos').style.display = pessoaJuridica ? 'block' : 'none';
+    }
+
+    tipoPessoa.addEventListener('change', atualizarCampos);
+
+    atualizarCampos(); // Chama a função para definir o estado inicial dos campos
+
+</script>
+</html>
