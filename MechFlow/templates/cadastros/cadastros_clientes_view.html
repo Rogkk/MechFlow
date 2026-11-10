@@ -9,5 +9,32 @@
     <h1>Cadastros de Clientes</h1>
     <a href="{% url 'cadastros:cadastros_novo_cliente' %}">Novo</a>
     <a href="{% url 'cadastros:cadastros_voltar' %}">Voltar</a>
+
+    <table border="1">
+        <thead>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Telefone</th>
+            <th>Email</th>
+            <th>Município</th>
+            <th>Editar</th>
+            <th>Remover</th>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+            {% if cliente.eh_cliente %}
+
+                <tr>
+                    <td>{{cliente.nome_razao_social}}</td>
+                    <td>{{cliente.cpf_cnpj}}</td>
+                    <td>{{cliente.celular}}</td>
+                    <td>{{cliente.email}}</td>
+                    <td>{{cliente.cidade}} - {{cliente.uf}}</td>
+                    <td><a href="{% url 'cadastros:cadastros_editar_cliente' cliente.id %}">Editar</a></td>
+                    <td><a href="{% url 'cadastros:cadastros_remover_cliente' cliente.id %}">Remover</a></td>
+                </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
 </body>
 </html>
