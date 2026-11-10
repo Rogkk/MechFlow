@@ -44,6 +44,8 @@ def cadastros_novo_cliente(request:HttpRequest):
             return redirect('cadastros:cadastros_clientes')
 
     context = {
-        'form': ParticipanteForm()
+        'form': ParticipanteForm(initial={
+            'eh_cliente': True,
+        })
     }
     return render(request, 'cadastros/cadastros_novo_cliente_view.html', context)
