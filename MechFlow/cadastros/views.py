@@ -49,3 +49,43 @@ def cadastros_novo_cliente(request:HttpRequest):
         })
     }
     return render(request, 'cadastros/cadastros_novo_cliente_view.html', context)
+
+def cadastros_fornecedores(request):
+    context = {
+        "fornecedores": ParticipanteModel.objects.all()
+    }
+    return render(request, 'cadastros/cadastros_fornecedores_view.html', context)
+
+def cadastros_novo_fornecedor(request:HttpRequest):
+    if request.method == 'POST':
+        form = ParticipanteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('cadastros:cadastros_fornecedores')
+
+    context = {
+        'form': ParticipanteForm(initial={
+            'eh_fornecedor': True,
+        })
+    }
+    return render(request, 'cadastros/cadastros_novo_cliente_view.html', context)
+
+def cadastros_remover_fornecedor(request:HttpRequest, id):
+    fornecedor = get_object_or_404(ParticipanteModel, id=id)
+    fornecedor.delete()
+    return redirect('cadastros:cadastros_fornecedores')
+
+def cadastros_editar_fornecedor(request:HttpRequest, id):
+    fornecedor = get_object_or_404(ParticipanteModel, id=id)
+    if request.method == 'POST':
+        form = ParticipanteForm(request.POST, instance=fornecedor)
+        if form.is_valid():
+            form.save()
+            return redirect('cadastros:cadastros_fornecedores')
+
+    form = ParticipanteForm(instance=fornecedor)
+    context = {
+        'form': form
+    }
+    return render(request, 'cadastros/cadastros_novo_cliente_view.html',
+        context)

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechFlow 0.1.0</title>
+</head>
+<body>
+    <h1>Cadastros de Fornecedores</h1>
+    <a href="{% url 'cadastros:cadastros_novo_fornecedor' %}">Novo</a>
+    <a href="{% url 'cadastros:cadastros_voltar' %}">Voltar</a>
+
+    <table border="1">
+        <thead>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Telefone</th>
+            <th>Email</th>
+            <th>Município</th>
+            <th>Editar</th>
+            <th>Remover</th>
+        </thead>
+        <tbody>
+            {% for fornecedor in fornecedores %}
+            {% if fornecedor.eh_fornecedor %}
+
+                <tr>
+                    <td>{{fornecedor.nome_razao_social}}</td>
+                    <td>{{fornecedor.cpf_cnpj}}</td>
+                    <td>{{fornecedor.celular}}</td>
+                    <td>{{fornecedor.email}}</td>
+                    <td>{{fornecedor.cidade}} - {{fornecedor.uf}}</td>
+                    <td><a href="{% url 'cadastros:cadastros_editar_fornecedor' fornecedor.id %}">Editar</a></td>
+                    <td><a href="{% url 'cadastros:cadastros_remover_fornecedor' fornecedor.id %}">Remover</a></td>
+                </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+</body>
+</html>
